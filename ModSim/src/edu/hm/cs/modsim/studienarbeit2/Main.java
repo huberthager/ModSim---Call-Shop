@@ -5,11 +5,13 @@ public class Main {
   public static void main(String[] args) {
 
     Client cl = new Client();
-    cl.printClientMessage();
 
-    Queue<Client> myQueue = new Queue<>();
-    myQueue.pushFront(cl);
-    myQueue.front().printClientMessage();
+    Queue queue = new Queue(2);
+    System.out.println(queue.size());
+    queue.addClient(cl);
+    queue.addClient(new Client());
+    System.out.println(queue.addClient(new Client()));
+    System.out.println(queue.size());
 
   }
 }
