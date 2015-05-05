@@ -19,5 +19,8 @@ public class Scheduler {
     // loesche das event aus der eventListe
 
   }
+  private void addEvent(){
+    Event event = new Event(1000);
+  }
 
 }

@@ -1,20 +1,20 @@
 package edu.hm.cs.modsim.studienarbeit2;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public class Queue {
 
-  private LinkedList<Client> clientList;
+  private PriorityQueue<Clients> clientList;
   private int maxSize;
 
   public Queue(int maxSize) {
-    clientList = new LinkedList<>();
+    clientQueue = new PriorityQueue<>();
     this.maxSize = maxSize;
   }
 
   public boolean addClient(Client client) {
     if (clientList.size() < maxSize) {
-      clientList.add(client);
+      clientQueue.add(client);
       return true;
 
     }
