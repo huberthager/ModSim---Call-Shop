@@ -20,4 +20,9 @@ public class Scheduler {
 
   }
 
+  public void fillEventList(){
+    AbstractEvent arrival = new Arrival(1000);
+    AbstractEvent serving = new Serving(100);
+  }
+
 }
