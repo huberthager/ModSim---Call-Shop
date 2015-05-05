@@ -2,15 +2,23 @@ package edu.hm.cs.modsim.studienarbeit2;
 
 public class Scheduler {
   public int simTime;
-  public int endSimTime;
 
-  public Scheduler(int endSimTime) {
-    this.simTime = 0;
-    this.endSimTime = endSimTime;
 
+  EventList eventList;
+
+  public Scheduler(int simTime) {
+    this.simTime = simTime;
+    eventList = new EventList();
   }
 
-  /* Methode die die eig simulaton durchfuehrt */
+  /** 
+    Methode die die eigentliche simulaton durchfuehrt
+  - Die evenliste 'unendlich' voll machen mit events beider Art.
+  - Dann während der Simulation die Zeiten der einzelnen Event anpassen (Zeit des gerade laufenden Events abziehen)
+  - Außerdem Zeit des nächsten Events von der gesamten Simulationszeit abziehen
+  - Simulation vorbei wenn simTime = 0
+  **/
+  
   public void run() {
     // while(EventList.size()!=0 & simTime<endSimTime)
     // hole dir das event mit der kleinesten Zeit
@@ -20,9 +28,14 @@ public class Scheduler {
 
   }
 
-  public void fillEventList(){
-    AbstractEvent arrival = new Arrival(1000);
-    AbstractEvent serving = new Serving(100);
+  private void fillEventList(){
+    //fill eventlist with 100 events
+    for(int i = 0; i < 100; i++){
+      AbstractEvent a = new Arrival(1000);
+    }
+    eventList.add(a);
   }
+
+  public void adjustSimTime(int time);
 
 }

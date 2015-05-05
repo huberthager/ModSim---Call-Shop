@@ -2,10 +2,14 @@ package edu.hm.cs.modsim.studienarbeit2;
 
 public abstract class AbstractEvent implements EventInterface{
 
-	int timeUntilNextEvent;
+	int eventTime;
 
-	public AbstractEvent(int timeUntilNextEvent){
-		this.timeUntilNextEvent = timeUntilNextEvent;
+	public AbstractEvent(int timeUntilEvent){
+		this.eventTime = timeUntilEvent;
+	}
+
+	public int getTime(){
+		return timeUntilEvent;
 	}
 }
 
