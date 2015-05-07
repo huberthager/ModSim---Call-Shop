@@ -2,12 +2,13 @@ package edu.hm.cs.modsim.studienarbeit2;
 
 public class Client {
 	
-	public Client() {
+	private double processTime;
+	private double arrivalTime; //Simulations-Zeitpunkt wann Kunde ankommt
 		
-	}
 	
-	public void printClientMessage() {
-		System.out.println("Ich bin ein Client");
+	public Client() {
+		//processTime und interArrivalTime aus EventList
 	}
+
 
 }
