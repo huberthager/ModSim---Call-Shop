@@ -1,21 +1,23 @@
 package edu.hm.cs.modsim.studienarbeit2;
 
 //ABC fuer alle events
-abstract class Event implements Comparable<Event> {
+abstract class Event {
+	
 
 //	protected double processTime;
 //	protected double arrivalTime; // Simulations-Zeitpunkt wann Kunde ankommt
 	protected double eventTime;
-
-	@Override
-	public int compareTo(Event other) {
-		return Double.compare(this.eventTime, other.eventTime);
-	}
-
-	public double getEventSimTime() {
+	
+	public double getEventTime() {
 		return eventTime;
 	}
 
-	abstract void processEvent();// veraenderung des Systemzustands
+	abstract void processEvent(Queue queue, Server server, EventList eventList, double simTime);
+	
+	
+	
+	public String toString() {
+		return "" + this.eventTime + " "+ this.getClass().getSimpleName();
+	}
 
 }

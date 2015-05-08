@@ -1,31 +1,53 @@
 package edu.hm.cs.modsim.studienarbeit2;
 
 
+
+
 public class Scheduler {
 	private EventList eventList;
-	private int simTime;
-	
+	private double clock;
+	private Queue queue;
+	private Server server;
+	private double endSimTime;
 
-
-	private int endSimTime;
-
-	public Scheduler(int endSimTime) {
-		this.simTime = 0;
+	public Scheduler(double endSimTime, int maxSize) {
+		this.clock = 0;
 		this.endSimTime = endSimTime;
-		
+		queue = new Queue(maxSize);
+		server = new Server();
+		eventList = new EventList();
+		Event arrivalEvent;
+		double initClock=0.0;
+		do{
+			arrivalEvent=new Arrival(initClock);
+			eventList.addEvent(arrivalEvent);
+			initClock=arrivalEvent.getEventTime();
+		}while(arrivalEvent.getEventTime()<endSimTime);
 	}
 
 	/* Methode die die eig simulaton durchfuehrt */
 	public void run() {
+		Event currentEvent;
+		
 		// while(EventList.size()!=0 & simTime<endSimTime)
-		// hole dir das event mit der kleinesten Zeit
-		// erhoehe die Zeit simeTime um die eventTime
+		while(!eventList.isEmpty()&&clock < endSimTime) {
+			System.out.println(eventList.toString());
+			currentEvent = eventList.getFirst();
+			clock = currentEvent.getEventTime();// hole dir das event mit der kleinesten Zeit
+			currentEvent.processEvent(queue,server,eventList,clock);
+			eventList.removeFirst();
+			eventList.sortEventList();
+			
+		}
+		
 		// fuehre das event aus
 		// loesche das event aus der eventListe
 
 	}
 	
-	public int getSimTime() {
-		return simTime;
+	public double getSimTime() {
+		return clock;
 	}
+	
+
 }
