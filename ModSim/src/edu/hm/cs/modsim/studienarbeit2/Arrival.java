@@ -16,8 +16,12 @@ public class Arrival extends Event {
 	}
 	
 	public double interArrivalTime() {
-		return 2;
+		double lambda = 0.001;
+		double u = Math.random();
+		return Math.log(1-u)/(-1)*lambda;
 	}
+	
+	
 	
 	
 	
