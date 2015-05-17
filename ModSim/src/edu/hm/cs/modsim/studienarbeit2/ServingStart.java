@@ -15,7 +15,7 @@ public class ServingStart extends Event {
 	}
 	
 	public double serviceTime() {
-		double lambda = 0.001;
+		double lambda = 1;
 		double u = Math.random();
 		return Math.log(1-u)/(-1)*lambda;
 	}
