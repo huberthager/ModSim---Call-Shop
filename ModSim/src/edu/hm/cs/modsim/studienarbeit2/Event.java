@@ -1,7 +1,7 @@
 package edu.hm.cs.modsim.studienarbeit2;
 
 //ABC fuer alle events
-abstract class Event {
+public abstract class Event {
 	
 
 //	protected double processTime;

@@ -7,7 +7,8 @@ public class Arrival extends Event {
 	}
 
 	@Override
-	void processEvent(Queue queue, Server server, EventList eventList, double clock) {
+	
+	public void processEvent(Queue queue, Server server, EventList eventList, double clock) {
 		if(server.isOccupied()) {
 			queue.addClient(new Client());
 		} else {
@@ -15,7 +16,8 @@ public class Arrival extends Event {
 		}
 	}
 	
-	public double interArrivalTime() {
+	// private helper method for constructor
+	private double interArrivalTime() {
 		double lambda = 1;
 		double u = Math.random();
 		return Math.log(1-u)/(-1)*lambda;

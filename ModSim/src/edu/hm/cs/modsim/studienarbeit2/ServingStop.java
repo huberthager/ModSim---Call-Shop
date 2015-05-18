@@ -7,7 +7,7 @@ public class ServingStop extends Event {
 	}
 
 	@Override
-	void processEvent(Queue queue, Server server, EventList eventList, double clock) {
+	public void processEvent(Queue queue, Server server, EventList eventList, double clock) {
 		if(!(queue.size() == 0)) {
 			eventList.addEvent(new ServingStart(clock));
 			

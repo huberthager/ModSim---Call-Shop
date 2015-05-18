@@ -11,5 +11,9 @@ public class Client {
 	public void addWaitingTime(double time) {
 		this.waitingTime += time;
 	}
+	
+	public double getWaitingTime() {
+		return waitingTime;
+	}
 
 }

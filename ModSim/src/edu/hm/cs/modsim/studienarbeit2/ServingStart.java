@@ -9,16 +9,15 @@ public class ServingStart extends Event {
 	}
 
 	@Override
-	void processEvent(Queue queue, Server server, EventList eventList, double clock) {
+	public void processEvent(Queue queue, Server server, EventList eventList, double clock) {
 		eventList.addEvent(new ServingStop(clock + serviceTime()));
 		server.setOccupied(true);
 	}
 	
-	public double serviceTime() {
+	private double serviceTime() {
 		double lambda = 1;
 		double u = Math.random();
 		return Math.log(1-u)/(-1)*lambda;
 	}
-
 
 }
