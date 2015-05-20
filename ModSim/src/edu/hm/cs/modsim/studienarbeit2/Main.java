@@ -30,7 +30,7 @@ public class Main {
 		mcs = s.getStatisticDataCollector().getMeanClientsInSystem();
 		mwt = s.getStatisticDataCollector().getMeanWaitingTimes();
 		timeOfClientInShop = s.getStatisticDataCollector().getListTimeOfClientInShop();
-		serverSpareTime = s.getStatisticDataCollector().getServerBusyTime();
+		serverSpareTime = simTime - s.getStatisticDataCollector().getServerBusyTime();
 		
 		//Writer 
 		String outputMQS = "";

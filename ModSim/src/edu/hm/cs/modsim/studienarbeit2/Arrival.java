@@ -19,7 +19,6 @@ public class Arrival extends Event {
 		} else {
 			eventList.addEvent(new ServingStart(clock));
 			sdc.addClientSystem(eventTime, 1); //Kunde kommt in leeres System
-			sdc.addBusyTime(eventTime);
 		}
 	}
 	

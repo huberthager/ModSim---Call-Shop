@@ -10,9 +10,10 @@ public class ServingStart extends Event {
 
 	@Override
 	public void processEvent(Queue queue, Server server, EventList eventList, double clock, StatisticDataCollector sdc) {
-		eventList.addEvent(new ServingStop(clock + serviceTime()));
+		double eventTimeOfServiceStop = clock + serviceTime();
+		eventList.addEvent(new ServingStop(eventTimeOfServiceStop));
 		server.setOccupied(true);
-		sdc.addBusyTime(serviceTime());
+		sdc.addBusyTime(eventTimeOfServiceStop - clock);
 	}
 	
 	public double serviceTime() {
