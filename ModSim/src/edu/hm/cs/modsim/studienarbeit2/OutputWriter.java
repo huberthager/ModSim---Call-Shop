@@ -1,34 +1,33 @@
 package edu.hm.cs.modsim.studienarbeit2;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 
 public class OutputWriter {
-	//TODO: InterArrivalTimes und ServingTimes in seperate Files schreiben
-	private OutputStream out2;
 	
-	public OutputWriter(String location) {
-		try {
-		out2 = new BufferedOutputStream(new FileOutputStream("/home/user1301/Documents/output2"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+	  private File file;
+	  private FileWriter writer;
+	  
+	  public OutputWriter(String filename) {
+		  this.file = new File(filename + ".txt");
+		  this.writer = null;
+	  }
+	  
+	  public void writeOutputToFile(String output) {
+	    try {
+	        writer = new FileWriter(file);
+	        writer.write(output);
+	    } catch (IOException e) {
+	        e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
+	    } finally {
+	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
+	    }
+	    System.out.printf("File is located at %s%n", file.getAbsolutePath());
+	  }
 	
-	public void writeOutput(String content) throws IOException {
-		byte[] bytes = content.getBytes();
-		try (OutputStream out = new BufferedOutputStream(new FileOutputStream("/home/user1301/Documents/output"))) {
-            out.write(bytes);
-            out.flush();
-            out2.write(bytes);
-            out2.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
-
 }

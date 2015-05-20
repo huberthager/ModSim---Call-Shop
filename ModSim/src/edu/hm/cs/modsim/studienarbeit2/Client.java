@@ -1,19 +1,14 @@
 package edu.hm.cs.modsim.studienarbeit2;
 
 public class Client {
+	double inQueue;
 	
-	double waitingTime;
-	
-	public Client(){
-		this.waitingTime = 0;
-	}
-
-	public void addWaitingTime(double time) {
-		this.waitingTime += time;
+	public Client(double inQueue){
+		this.inQueue = inQueue;
 	}
 	
-	public double getWaitingTime() {
-		return waitingTime;
+	public double getInQueueTime() {
+		return inQueue;
 	}
 
 }

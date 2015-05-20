@@ -12,9 +12,10 @@ public class ServingStart extends Event {
 	public void processEvent(Queue queue, Server server, EventList eventList, double clock, StatisticDataCollector sdc) {
 		eventList.addEvent(new ServingStop(clock + serviceTime()));
 		server.setOccupied(true);
+		sdc.addBusyTime(serviceTime());
 	}
 	
-	private double serviceTime() {
+	public double serviceTime() {
 		double lambda = 100;
 		double u = Math.random();
 		return Math.log(1-u)/(-1)*lambda;

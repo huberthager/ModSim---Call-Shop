@@ -12,7 +12,7 @@ public abstract class Event {
 		return eventTime;
 	}
 
-	abstract void processEvent(Queue queue, Server server, EventList eventList, double simTime);
+	abstract void processEvent(Queue queue, Server server, EventList eventList, double simTime, StatisticDataCollector sdc);
 	
 	
 	
