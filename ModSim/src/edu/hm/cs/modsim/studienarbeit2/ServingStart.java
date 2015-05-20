@@ -1,5 +1,7 @@
 package edu.hm.cs.modsim.studienarbeit2;
 
+import java.util.List;
+
 public class ServingStart extends Event {
 
 	
@@ -10,10 +12,11 @@ public class ServingStart extends Event {
 
 	@Override
 	public void processEvent(Queue queue, Server server, EventList eventList, double clock, StatisticDataCollector sdc) {
-		double eventTimeOfServiceStop = clock + serviceTime();
-		eventList.addEvent(new ServingStop(eventTimeOfServiceStop));
+		double serviceTime = serviceTime();
+		eventList.addEvent(new ServingStop(serviceTime + clock));
 		server.setOccupied(true);
-		sdc.addBusyTime(eventTimeOfServiceStop - clock);
+//		addAllServiceTimes(sdc.getServerBusyTimes(),serviceTime);
+		
 	}
 	
 	public double serviceTime() {
@@ -21,5 +24,6 @@ public class ServingStart extends Event {
 		double u = Math.random();
 		return Math.log(1-u)/(-1)*lambda;
 	}
+	
 
 }

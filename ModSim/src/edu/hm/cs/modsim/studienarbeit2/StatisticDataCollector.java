@@ -4,25 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StatisticDataCollector {
-
-	private List<List<Double>> mqs = new ArrayList<List<Double>>();
-	private List<List<Double>> mcs = new ArrayList<List<Double>>();
+	
+	private List<Double> queueClocks = new ArrayList<Double>();
+	private List<Double> queueLengths = new ArrayList<Double>();
+	
+	private List<Double> ShopClientState = new ArrayList<Double>();
+	private List<Double> ShopClockState = new ArrayList<Double>();
+	
+	
 	private List<Double> mwt = new ArrayList<Double>();
 	private List<Double> timeOfClientInShop = new ArrayList<Double>();
-	private double serverBusyTime = 0;
+	private List<Double> serverBusyTime = new ArrayList<Double>();
+//	private double serverBusyTime = 0;
 
 	public void addQueueEntry(double clock, double queueSize) {
-		List<Double> entry = new ArrayList<>();
-		entry.add(clock);
-		entry.add(queueSize);
-		mqs.add(entry);
+		queueClocks.add(clock);
+		queueLengths.add(queueSize);
 	}
 
-	public void addClientSystem(double clock, double clientsInSystem) {
-		List<Double> entry = new ArrayList<>();
-		entry.add(clock);
-		entry.add(clientsInSystem);
-		mcs.add(entry);
+	public void addNumberOfClientsInSystem(double clock, double clientsInSystem) {
+		ShopClockState.add(clock);
+		ShopClientState.add(clientsInSystem);
 	}
 
 	public void addMeanWaitingTime(double d) {
@@ -33,28 +35,30 @@ public class StatisticDataCollector {
 		timeOfClientInShop.add(d);
 	}
 	
-	public void addBusyTime(double d) {
-		serverBusyTime += d;
+	public void addServerBusyTimes(double d) {
+		serverBusyTime.add(d);
+	}
+//	public void addBusyTime(double d) {
+//		serverBusyTime += d;
+//	}
+
+//	public String toString() {
+//		String out = "";
+//		for (List<Double> e : queueClocks) {
+//			for (double d : e) {
+//				out += d + "|";
+//			}
+//		}
+//		System.out.println(out);
+//		return out;
+//	}
+
+	public List<Double> getQueueLengths() {
+		List<Double> appended = queueLengths;
+		appended.addAll(queueClocks);
+		return appended;
 	}
 
-	public String toString() {
-		String out = "";
-		for (List<Double> e : mqs) {
-			for (double d : e) {
-				out += d + "|";
-			}
-		}
-		System.out.println(out);
-		return out;
-	}
-
-	public List<List<Double>> getMeanQueue() {
-		return mqs;
-	}
-
-	public List<List<Double>> getMeanClientsInSystem() {
-		return mcs;
-	}
 
 	public List<Double> getMeanWaitingTimes() {
 		return mwt;
@@ -64,8 +68,14 @@ public class StatisticDataCollector {
 		return timeOfClientInShop;
 	}
 	
-	public double getServerBusyTime() {
+	public List<Double> getServerBusyTimes() {
 		return serverBusyTime;
+	}
+	
+	public List<Double> getShopClientState() {
+		List<Double> appended = ShopClientState;
+		appended.addAll(ShopClockState);
+		return appended;
 	}
 	
 }

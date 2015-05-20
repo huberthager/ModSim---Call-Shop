@@ -11,7 +11,7 @@ public class ServingStop extends Event {
 
 	@Override
 	public void processEvent(Queue queue, Server server, EventList eventList, double clock, StatisticDataCollector sdc) {
-		if(!(queue.size() == 0)) {
+		if((queue.size() != 0)) {
 			ServingStart ss = new ServingStart(clock);
 			eventList.addEvent(ss);
 			currentClient = queue.removeClient();
@@ -19,10 +19,10 @@ public class ServingStop extends Event {
 			sdc.addMeanWaitingTime(waitingTime);
 			sdc.addTimeOfClientInShop(ss.serviceTime());
 			sdc.addQueueEntry(eventTime, queue.size());
-			sdc.addClientSystem(clock, queue.size()+1);
+			sdc.addNumberOfClientsInSystem(clock, queue.size()+1);
 		} else {
 			server.setOccupied(false);
-			sdc.addClientSystem(clock, 0);
+			sdc.addNumberOfClientsInSystem(clock, 0);
 			
 		}
 	}

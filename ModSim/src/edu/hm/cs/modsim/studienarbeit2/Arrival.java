@@ -14,11 +14,11 @@ public class Arrival extends Event {
 		if(server.isOccupied()) {
 			queue.addClient(new Client(eventTime));
 			sdc.addQueueEntry(eventTime, queue.size());
-			sdc.addClientSystem(eventTime, queue.size()+1); //am server steht einer
+			sdc.addNumberOfClientsInSystem(eventTime, queue.size()+1); //am server steht einer
 			
 		} else {
 			eventList.addEvent(new ServingStart(clock));
-			sdc.addClientSystem(eventTime, 1); //Kunde kommt in leeres System
+			sdc.addNumberOfClientsInSystem(eventTime, 1); //Kunde kommt in leeres System
 		}
 	}
 	

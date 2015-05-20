@@ -23,7 +23,7 @@ public class OutputWriter {
 	        writer = new FileWriter(file);
 	        writer.write(output);
 	    } catch (IOException e) {
-	        e.printStackTrace(); // I'd rather declare method with throws IOException and omit this catch.
+	        e.printStackTrace();
 	    } finally {
 	        if (writer != null) try { writer.close(); } catch (IOException ignore) {}
 	    }

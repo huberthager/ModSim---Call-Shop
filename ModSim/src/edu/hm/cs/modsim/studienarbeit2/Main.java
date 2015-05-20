@@ -1,93 +1,61 @@
 package edu.hm.cs.modsim.studienarbeit2;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Main {
 
 	public static void main(String[] args) {
+		//Modellannahmen 
+		int month = 720; // Simulationsdauer in Stunden entspricht 1 Monat
+		int quarter = 720*3; //Simulationsdauer in Stunden entspricht ein 4. Jahr
+		int queueSize = 20; // Schlangenlänge
 		// Statistische Daten:
 		
 		// Clock wenn ein Kunde sich anstellt/Schlange verlässt + derzeitige
 		// Schlangenlänge
-		List<List<Double>> mqs = new ArrayList<List<Double>>();
+		List<Double> queueLengths;
 		// Clock wenn Kunde Shop betritt/Shop verlässt + derzeitige Anzahl von
 		// Kunden in Shop
-		List<List<Double>> mcs = new ArrayList<List<Double>>();
+		List<Double> numberOfClientsInShop;
 		//Wartezeit der Clients in Schlange
 		List<Double> mwt = new ArrayList<Double>();
 		//Verweilzeiten der Kunden im Shop
 		List<Double> timeOfClientInShop = new ArrayList<Double>();
-		double serverBusyTime;
+//		double serverBusyTime;
 		
-		int simTime = 4800;
+
 		// SimSetup mit Parameter : Simulationsdauer , maximale
 		// Warteschlangenlï¿½nge
-		Scheduler s = new Scheduler(simTime, 10);
+		Scheduler s = new Scheduler(month, queueSize);
 		s.run();
-		mqs = s.getStatisticDataCollector().getMeanQueue();
-		mcs = s.getStatisticDataCollector().getMeanClientsInSystem();
+		queueLengths = s.getStatisticDataCollector().getQueueLengths();
+		numberOfClientsInShop = s.getStatisticDataCollector().getShopClientState();
 		mwt = s.getStatisticDataCollector().getMeanWaitingTimes();
 		timeOfClientInShop = s.getStatisticDataCollector().getListTimeOfClientInShop();
-		serverBusyTime = (s.getStatisticDataCollector().getServerBusyTime())/(simTime*3600);
+//		serverBusyTime = (s.getStatisticDataCollector().getServerBusyTimes())/(simTime*3600);
 		
-		//Writer 
-		String outputMQS = "";
-		
-		// iterate via "iterator loop"
-		System.out.println("\n==> Clock, Warteschlangenlänge");
-		Iterator<List<Double>> mqsIterator = mqs.iterator();
-		while (mqsIterator.hasNext()) {
-//			System.out.println(mqsIterator.next());
-			outputMQS += mqsIterator.next();
-			outputMQS += ",";
-		}
-		System.out.println(outputMQS);
-		
-		System.out.println("\n==> Clock, Anzahl Clients im System");
-		Iterator<List<Double>> mcsIterator = mcs.iterator();
-		while (mcsIterator.hasNext()) {
-			System.out.println(mcsIterator.next());
-		}
-		
-		System.out.println("\n==> Wartezeit i-ter Client in Schlange");
-		Iterator<Double>mwtIterator =mwt.iterator();
-		while (mwtIterator.hasNext()) {
-			System.out.println(mwtIterator.next());
-		}
-		
-		System.out.println("\n==> Verweildauer der Kunden im Shop");
-		Iterator<Double>tocisIterator =timeOfClientInShop.iterator();
-		while (tocisIterator.hasNext()) {
-			System.out.println(tocisIterator.next());
-		}
-		
-		System.out.println("\n==> Zeit in der Server besetzt ist");
-		System.out.println(serverBusyTime);
-
+	
 		
 
-//		 OutputWriter ow = new OutputWriter("MeanQueueSize");
-//		 ow.writeOutputToFile(outputMQS);
-//		
+		
+		 OutputWriter ow1 = new OutputWriter("Warteschlangenlänge");
+		 ow1.writeOutputToFile(queueLengths.toString());
+		
+
+		 OutputWriter ow2 = new OutputWriter("AnzahlKundenShop");
+		 ow2.writeOutputToFile(numberOfClientsInShop.toString());
+		 
+		 
+		 OutputWriter ow3 = new OutputWriter("Anstehzeit");
+		 ow3.writeOutputToFile(mwt.toString());
+		 
+		 
+		 OutputWriter ow4 = new OutputWriter("Verweildauer");
+		 ow4.writeOutputToFile(timeOfClientInShop.toString());
+		
+
 	}
 
-	private static double interArrivalTime() {
-		double lambda = 1000;
-		double u = Math.random();
-		return Math.log(1 - u) / (-1) * lambda;
-	}
-
-	private static String interArrivalsToString() {
-		String out = "";
-		for (int i = 0; i < 999; i++) {
-			out += interArrivalTime();
-			out += ",";
-		}
-		out += interArrivalTime();
-
-		return out;
-	}
 }
 

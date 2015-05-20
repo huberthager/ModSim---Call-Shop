@@ -14,10 +14,5 @@ public abstract class Event {
 
 	abstract void processEvent(Queue queue, Server server, EventList eventList, double simTime, StatisticDataCollector sdc);
 	
-	
-	
-	public String toString() {
-		return "" + this.eventTime + " "+ this.getClass().getSimpleName();
-	}
 
 }

@@ -38,6 +38,8 @@ public class Scheduler {
 		Event currentEvent;
 
 		// while(EventList.size()!=0 & simTime<endSimTime)
+//		int iters = 0;
+		double lengthQueueBefore = 0;
 		while (!eventList.isEmpty() && clock < endSimTime) {
 			// System.out.println(eventList.toString());
 			currentEvent = eventList.getFirst();
@@ -47,12 +49,14 @@ public class Scheduler {
 			eventList.removeFirst();
 			eventList.sortEventList();
 			
-			if(steadyStateYN==false){
-				
-			}
 			
-			
-
+//			double lengthNewQueue = sdc.getQueueLenghtI(iters1);
+//			if(steadyStateYN==false){
+//				sdc.getQueueLenghtI(iters)
+//			}
+//			
+//			
+//			iters++;
 		}
 
 		// fuehre das event aus
