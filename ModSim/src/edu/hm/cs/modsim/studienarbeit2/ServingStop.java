@@ -17,7 +17,7 @@ public class ServingStop extends Event {
 			currentClient = queue.removeClient();
 			waitingTime = eventTime - currentClient.getInQueueTime();
 			sdc.addMeanWaitingTime(waitingTime);
-			sdc.addTimeOfClientInShop(ss.serviceTime());
+			sdc.addTimeOfClientInShop(waitingTime+ss.serviceTime());
 			sdc.addQueueEntry(eventTime, queue.size());
 			sdc.addNumberOfClientsInSystem(clock, queue.size()+1);
 		} else {

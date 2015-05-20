@@ -24,7 +24,7 @@ public class Arrival extends Event {
 	
 	// private helper method for constructor
 	private double interArrivalTime() {
-		double lambda = 1000;
+		double lambda = 100;
 		double u = Math.random();
 		return Math.log(1-u)/(-1)*lambda;
 	}
