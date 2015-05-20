@@ -19,9 +19,9 @@ public class Main {
 		List<Double> mwt = new ArrayList<Double>();
 		//Verweilzeiten der Kunden im Shop
 		List<Double> timeOfClientInShop = new ArrayList<Double>();
-		double serverSpareTime;
+		double serverBusyTime;
 		
-		int simTime = 10000;
+		int simTime = 4800;
 		// SimSetup mit Parameter : Simulationsdauer , maximale
 		// Warteschlangenl�nge
 		Scheduler s = new Scheduler(simTime, 10);
@@ -30,7 +30,7 @@ public class Main {
 		mcs = s.getStatisticDataCollector().getMeanClientsInSystem();
 		mwt = s.getStatisticDataCollector().getMeanWaitingTimes();
 		timeOfClientInShop = s.getStatisticDataCollector().getListTimeOfClientInShop();
-		serverSpareTime = simTime - s.getStatisticDataCollector().getServerBusyTime();
+		serverBusyTime = (s.getStatisticDataCollector().getServerBusyTime())/(simTime*3600);
 		
 		//Writer 
 		String outputMQS = "";
@@ -63,8 +63,8 @@ public class Main {
 			System.out.println(tocisIterator.next());
 		}
 		
-		System.out.println("\n==> Zeit in der Server frei ist");
-		System.out.println(serverSpareTime);
+		System.out.println("\n==> Zeit in der Server besetzt ist");
+		System.out.println(serverBusyTime);
 
 		
 

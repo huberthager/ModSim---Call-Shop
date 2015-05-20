@@ -7,10 +7,17 @@ public class Scheduler {
 	private Server server;
 	private double endSimTime;
 	private StatisticDataCollector sdc;
-	int inHours = 3600;
+	private int inHours = 3600;
+	private double TOL=0.01;
+	private boolean steadyStateYN;
+	private double steadyState;
+	
+	
 
 	public Scheduler(double endSimTime, int maxSize) {
-//		endSimTime *= inHours;
+		endSimTime *= inHours;
+		this.steadyStateYN=false;
+		this.steadyState=0;
 		this.clock = 0;
 		this.endSimTime = endSimTime;
 		this.sdc = new StatisticDataCollector();
@@ -40,6 +47,9 @@ public class Scheduler {
 			eventList.removeFirst();
 			eventList.sortEventList();
 			
+			if(steadyStateYN==false){
+				
+			}
 			
 			
 
