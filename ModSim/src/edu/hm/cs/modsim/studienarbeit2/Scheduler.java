@@ -1,3 +1,6 @@
+/*
+@author Hubert Hager
+*/
 package edu.hm.cs.modsim.studienarbeit2;
 
 public class Scheduler {
@@ -8,16 +11,13 @@ public class Scheduler {
 	private double endSimTime;
 	private StatisticDataCollector sdc;
 	private int inHours = 3600;
-	private double TOL=0.01;
-	private boolean steadyStateYN;
-	private double steadyState;
+	
 	
 	
 
 	public Scheduler(double endSimTime, int maxSize) {
 		endSimTime *= inHours;
-		this.steadyStateYN=false;
-		this.steadyState=0;
+		
 		this.clock = 0;
 		this.endSimTime = endSimTime;
 		this.sdc = new StatisticDataCollector();
@@ -33,15 +33,16 @@ public class Scheduler {
 		} while (arrivalEvent.getEventTime() < endSimTime);
 	}
 
-	/* Methode die die eig simulaton durchfuehrt */
+	/* Methode die die eigentliche Simulaton durchfuehrt. Holt sich in einer while - Schleife das 
+	 * nächste Event aus unser future event list (eventlist)
+	 * */
 	public void run() {
 		Event currentEvent;
 
-		// while(EventList.size()!=0 & simTime<endSimTime)
-//		int iters = 0;
+		
 		double lengthQueueBefore = 0;
 		while (!eventList.isEmpty() && clock < endSimTime) {
-			// System.out.println(eventList.toString());
+			
 			currentEvent = eventList.getFirst();
 			clock = currentEvent.getEventTime();// hole dir das event mit der
 												// kleinesten Zeit
@@ -50,18 +51,12 @@ public class Scheduler {
 			eventList.sortEventList();
 			
 			
-//			double lengthNewQueue = sdc.getQueueLenghtI(iters1);
-//			if(steadyStateYN==false){
-//				sdc.getQueueLenghtI(iters)
-//			}
-//			
-//			
-//			iters++;
+			
+					
+			
 		}
 
-		// fuehre das event aus
-		// loesche das event aus der eventListe
-
+		
 	}
 
 	public double getSimTime() {

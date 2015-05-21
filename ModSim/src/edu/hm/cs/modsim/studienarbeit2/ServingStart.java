@@ -1,3 +1,6 @@
+/*
+@author Tobias Höfer
+*/
 package edu.hm.cs.modsim.studienarbeit2;
 
 import java.util.List;

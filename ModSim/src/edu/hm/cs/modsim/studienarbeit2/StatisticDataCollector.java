@@ -1,3 +1,6 @@
+/*
+@author Hubert Hager, Julian Bauer
+*/
 package edu.hm.cs.modsim.studienarbeit2;
 
 import java.util.ArrayList;
